@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import pl.nlo.jira.security.entity.UserEntity;
 import pl.nlo.jira.security.enums.RoleEnum;
 import pl.nlo.jira.security.jwt.JwtService;
+import pl.nlo.jira.security.jwt.JwtToken;
 import pl.nlo.jira.security.repository.UserRepository;
 
 /**
@@ -30,7 +31,7 @@ public class AuthenticationService {
 				.roleEnum(RoleEnum.USER)
 				.build();
 		userRepository.save(userEntity);
-		String jwtToken = jwtService.generateToken(userEntity);
+		JwtToken jwtToken = jwtService.generateToken(userEntity);
 		return AuthenticationResponse.builder()
 				.token(jwtToken)
 				.build();
@@ -46,7 +47,7 @@ public class AuthenticationService {
 
 		UserEntity userEntity = userRepository.findByEmail(request.getEmail())
 				.orElseThrow(() -> new RuntimeException("Nie znaleziono użytkownika"));
-		String jwtToken = jwtService.generateToken(userEntity);
+		JwtToken jwtToken = jwtService.generateToken(userEntity);
 		return AuthenticationResponse.builder()
 				.token(jwtToken)
 				.build();
