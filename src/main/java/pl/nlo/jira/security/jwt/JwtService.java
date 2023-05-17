@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,18 +29,25 @@ public class JwtService {
 		return extractClaim(token, Claims::getSubject);
 	}
 
-	public String generateToken(UserDetails userDetails) {
+	public JwtToken generateToken(UserDetails userDetails) {
 		return generateToken(new HashMap<>(), userDetails);
 	}
 
-	public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
-		return Jwts.builder()
+	public JwtToken generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
+		LocalDateTime currentDate = LocalDateTime.now();
+		Date issuedAt = java.sql.Timestamp.valueOf(currentDate);
+		Date expiresAt = java.sql.Timestamp.valueOf(currentDate.plusMinutes(30));
+		String tokenStr = Jwts.builder()
 				.setClaims(extraClaims)
 				.setSubject(userDetails.getUsername())
-				.setIssuedAt(new Date(System.currentTimeMillis()))
-				.setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
+				.setIssuedAt(issuedAt)
+				.setExpiration(expiresAt)
 				.signWith(getSignInKey(), SignatureAlgorithm.HS256)
 				.compact();
+		return JwtToken.builder()
+				.token(tokenStr)
+				.expiration(expiresAt.toString())
+				.build();
 	}
 
 	public boolean isTokenValid(String token, UserDetails userDetails) {
