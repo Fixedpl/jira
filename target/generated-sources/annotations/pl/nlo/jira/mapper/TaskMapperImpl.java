@@ -10,7 +10,7 @@ import pl.nlo.jira.entity.UserEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-05-19T17:14:50+0200",
+    date = "2023-05-19T17:53:21+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component
