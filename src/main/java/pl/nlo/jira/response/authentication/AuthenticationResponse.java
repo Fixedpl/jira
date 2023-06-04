@@ -1,4 +1,4 @@
-package pl.nlo.jira.auth;
+package pl.nlo.jira.response.authentication;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

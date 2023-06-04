@@ -1,4 +1,4 @@
-package pl.nlo.jira;
+package pl.nlo.jira.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import pl.nlo.jira.security.repository.UserRepository;
+import pl.nlo.jira.repository.UserRepository;
 
 /**
  * @author marcin

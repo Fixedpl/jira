@@ -1,4 +1,4 @@
-package pl.nlo.jira;
+package pl.nlo.jira.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

@@ -1,15 +1,18 @@
-package pl.nlo.jira.auth;
+package pl.nlo.jira.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import pl.nlo.jira.security.entity.UserEntity;
-import pl.nlo.jira.security.enums.RoleEnum;
+import pl.nlo.jira.request.authentication.AuthenticationRequest;
+import pl.nlo.jira.response.authentication.AuthenticationResponse;
+import pl.nlo.jira.request.register.RegisterRequest;
+import pl.nlo.jira.entity.UserEntity;
+import pl.nlo.jira.entity.enums.RoleEnum;
 import pl.nlo.jira.security.jwt.JwtService;
 import pl.nlo.jira.security.jwt.JwtToken;
-import pl.nlo.jira.security.repository.UserRepository;
+import pl.nlo.jira.repository.UserRepository;
 
 /**
  * @author marcin

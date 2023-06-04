@@ -1,4 +1,4 @@
-package pl.nlo.jira.auth;
+package pl.nlo.jira.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -6,6 +6,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pl.nlo.jira.request.authentication.AuthenticationRequest;
+import pl.nlo.jira.response.authentication.AuthenticationResponse;
+import pl.nlo.jira.service.AuthenticationService;
+import pl.nlo.jira.request.register.RegisterRequest;
 
 /**
  * @author marcin

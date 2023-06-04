@@ -1,7 +1,7 @@
-package pl.nlo.jira.security.repository;
+package pl.nlo.jira.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import pl.nlo.jira.security.entity.UserEntity;
+import pl.nlo.jira.entity.UserEntity;
 
 import java.util.Optional;
 

@@ -1,4 +1,4 @@
-package pl.nlo.jira.security.entity;
+package pl.nlo.jira.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import pl.nlo.jira.security.enums.RoleEnum;
+import pl.nlo.jira.entity.enums.RoleEnum;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

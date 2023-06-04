@@ -1,4 +1,4 @@
-package pl.nlo.jira;
+package pl.nlo.jira.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

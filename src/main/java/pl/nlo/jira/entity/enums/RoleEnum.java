@@ -1,4 +1,4 @@
-package pl.nlo.jira.security.enums;
+package pl.nlo.jira.entity.enums;
 
 /**
  * @author marcin
