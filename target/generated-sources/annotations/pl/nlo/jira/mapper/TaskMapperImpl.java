@@ -7,10 +7,12 @@ import org.springframework.stereotype.Component;
 import pl.nlo.jira.dto.TaskDTO;
 import pl.nlo.jira.entity.Task;
 import pl.nlo.jira.entity.UserEntity;
+import pl.nlo.jira.entity.enums.Priority;
+import pl.nlo.jira.entity.enums.State;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-05-19T17:53:21+0200",
+    date = "2023-05-20T12:09:30+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component
@@ -29,8 +31,15 @@ public class TaskMapperImpl implements TaskMapper {
         if ( taskDTO.getId() != null ) {
             task.id( taskDTO.getId().intValue() );
         }
+        task.title( taskDTO.getTitle() );
         task.description( taskDTO.getDescription() );
         task.estimatedTime( taskDTO.getEstimatedTime() );
+        if ( taskDTO.getState() != null ) {
+            task.state( Enum.valueOf( State.class, taskDTO.getState() ) );
+        }
+        if ( taskDTO.getPriority() != null ) {
+            task.priority( Enum.valueOf( Priority.class, taskDTO.getPriority() ) );
+        }
 
         return task.build();
     }
@@ -48,8 +57,15 @@ public class TaskMapperImpl implements TaskMapper {
         if ( task.getId() != null ) {
             taskDTO.setId( task.getId().longValue() );
         }
+        taskDTO.setTitle( task.getTitle() );
         taskDTO.setDescription( task.getDescription() );
         taskDTO.setEstimatedTime( task.getEstimatedTime() );
+        if ( task.getState() != null ) {
+            taskDTO.setState( task.getState().name() );
+        }
+        if ( task.getPriority() != null ) {
+            taskDTO.setPriority( task.getPriority().name() );
+        }
 
         return taskDTO;
     }

@@ -8,6 +8,8 @@ import java.time.LocalDateTime;
 public class TaskDTO {
     private Long id;
 
+    private String title;
+
     private String description;
 
     private Integer reporterId;
@@ -17,9 +19,10 @@ public class TaskDTO {
     private LocalDateTime estimatedTime;
 
     //TODO: Dorobic State, Sprint i Priority
-    //private State stateId;
+    private String state;
+
+    private String priority;
 
     //private Integer sprintId;
 
-    //private Priority priorityId;
 }

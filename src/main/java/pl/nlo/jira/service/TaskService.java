@@ -10,6 +10,7 @@ import pl.nlo.jira.mapper.TaskMapper;
 import pl.nlo.jira.repository.TaskRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,7 +23,17 @@ public class TaskService {
         taskRepository.save(taskMapper.toEntity(taskDTO));
     }
 
+    public void updateTask(TaskDTO taskDTO) {
+        taskRepository.save(taskMapper.toEntity(taskDTO));
+    }
+
     public List<TaskDTO> findAllTasks() {
         return taskMapper.toDTOs(taskRepository.findAll());
+    }
+
+    public TaskDTO findTaskById(Integer taskId) {
+        return taskRepository.findById(taskId)
+                .map(taskMapper::toDTO)
+                .orElseThrow(() -> new RuntimeException("Task not found"));
     }
 }
