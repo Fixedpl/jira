@@ -1,0 +1,13 @@
+/target/classes/pl/nlo/jira/entity/Auditable.class
+/target/classes/pl/nlo/jira/entity/Comment$CommentBuilder.class
+/target/classes/pl/nlo/jira/entity/Comment.class
+/target/classes/pl/nlo/jira/controller/validator/CommentController.class
+/target/classes/pl/nlo/jira/dto/CommentDTO.class
+/target/classes/pl/nlo/jira/mapper/CommentMapper.class
+/target/classes/pl/nlo/jira/mapper/CommentMapperImpl.class
+/target/classes/pl/nlo/jira/repository/CommentRepository.class
+/target/classes/pl/nlo/jira/service/CommentService.class
+/target/classes/pl/nlo/jira/entity/enums/Priority.class
+/target/classes/pl/nlo/jira/security/SecurityAuditorAware.class
+/target/classes/pl/nlo/jira/entity/enums/State.class
+/target/classes/pl/nlo/jira/controller/validator/TaskValidator.class
