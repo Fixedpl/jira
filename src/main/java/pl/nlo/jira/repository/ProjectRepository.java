@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import pl.nlo.jira.entity.ProjectEntity;
+import pl.nlo.jira.entity.UserEntity;
 
 import javax.transaction.Transactional;
 import java.util.List;
