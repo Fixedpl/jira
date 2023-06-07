@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 /**
  * @author marcin
@@ -25,5 +26,6 @@ public class ProjectEntity {
 	private String name;
 	@Column(length = 10000)
 	private String description;
-
+	private LocalDateTime startDate;
+	private LocalDateTime endDate;
 }

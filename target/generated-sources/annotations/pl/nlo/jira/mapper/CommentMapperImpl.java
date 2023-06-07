@@ -8,7 +8,7 @@ import pl.nlo.jira.entity.Task;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-05-20T12:09:30+0200",
+    date = "2023-06-07T16:42:32+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component

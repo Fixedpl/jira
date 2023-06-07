@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.nlo.jira.dto.TaskDTO;
 import pl.nlo.jira.entity.Task;
 import pl.nlo.jira.mapper.TaskMapper;
@@ -19,6 +20,7 @@ public class TaskService {
 
     private final TaskMapper taskMapper;
 
+    @Transactional
     public void createTask(TaskDTO taskDTO) {
         taskRepository.save(taskMapper.toEntity(taskDTO));
     }

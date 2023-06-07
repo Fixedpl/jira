@@ -1,13 +1,16 @@
 package pl.nlo.jira.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.nlo.jira.dto.ProjectDTO;
 import pl.nlo.jira.entity.ProjectEntity;
 import pl.nlo.jira.entity.SprintEntity;
 import pl.nlo.jira.entity.UserEntity;
 import pl.nlo.jira.repository.ProjectRepository;
 import pl.nlo.jira.repository.SprintRepository;
 import pl.nlo.jira.service.AuthenticationService;
+import pl.nlo.jira.service.ProjectService;
 
 import java.util.List;
 
@@ -23,6 +26,13 @@ public class ProjectController {
 	private final ProjectRepository projectRepository;
 	private final AuthenticationService authenticationService;
 	private final SprintRepository sprintRepository;
+	private final ProjectService projectService;
+
+	@PostMapping("/create")
+	public ResponseEntity<Void> createProject(@RequestBody ProjectDTO projectDTO) {
+		projectService.createProject(projectDTO);
+		return ResponseEntity.ok().build();
+	}
 
 	@GetMapping
 	public List<ProjectEntity> getProjects() {
@@ -46,4 +56,8 @@ public class ProjectController {
 		sprintRepository.save(sprintEntity);
 	}
 
+	@GetMapping("/usersProject")
+	public ResponseEntity<List<ProjectEntity>> getCurrentUserProjects() {
+		return ResponseEntity.ok(projectService.getCurrentUserProjects());
+	}
 }
