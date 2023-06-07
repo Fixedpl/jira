@@ -5,11 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.io.Serializable;
+import javax.persistence.*;
 
 /**
  * @author marcin
@@ -21,11 +17,12 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Entity(name = "project_user")
 @Table(name = "project_user")
-public class ProjectUserLinkEntity implements Serializable {
+public class ProjectUserEntity {
 
 	@Id
-	private Integer project_id;
-	@Id
-	private Integer user_id;
+	@GeneratedValue
+	private Integer id;
+	private Integer projectId;
+	private Integer userId;
 
 }

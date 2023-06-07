@@ -25,4 +25,5 @@ public class ProjectEntity {
 	private String name;
 	@Column(length = 10000)
 	private String description;
+
 }

@@ -1,12 +1,12 @@
 package pl.nlo.jira.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.nlo.jira.entity.ProjectEntity;
+import pl.nlo.jira.entity.SprintEntity;
 import pl.nlo.jira.entity.UserEntity;
 import pl.nlo.jira.repository.ProjectRepository;
+import pl.nlo.jira.repository.SprintRepository;
 import pl.nlo.jira.service.AuthenticationService;
 
 import java.util.List;
@@ -22,11 +22,28 @@ public class ProjectController {
 
 	private final ProjectRepository projectRepository;
 	private final AuthenticationService authenticationService;
+	private final SprintRepository sprintRepository;
 
 	@GetMapping
 	public List<ProjectEntity> getProjects() {
 		UserEntity activeUser = authenticationService.getActiveUser();
 		return projectRepository.getProjectEntityByUserId(activeUser.getId());
+	}
+
+	@GetMapping("/{id}")
+	public ProjectEntity findById(@PathVariable("id") Integer id) {
+		return projectRepository.findById(id).get();
+	}
+
+	@GetMapping("/{id}/sprint")
+	public List<SprintEntity> getSprints(@PathVariable("id") Integer id) {
+		return sprintRepository.findByProjectId(id);
+	}
+
+	@PostMapping("/{id}/sprint")
+	public void addSprint(@PathVariable("id") Integer id, @RequestBody SprintEntity sprintEntity) {
+		sprintEntity.setProjectId(id);
+		sprintRepository.save(sprintEntity);
 	}
 
 }

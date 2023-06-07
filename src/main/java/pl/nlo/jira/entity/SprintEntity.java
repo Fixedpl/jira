@@ -5,10 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * @author marcin
@@ -26,5 +25,11 @@ public class SprintEntity {
 	@GeneratedValue
 	private Integer id;
 	private Integer projectId;
+	private String title;
+	private LocalDate startDate;
+	private LocalDate endDate;
+	private LocalDateTime actualStartDate;
+	private LocalDateTime actualEndDate;
+	private boolean isActive;
 
 }
