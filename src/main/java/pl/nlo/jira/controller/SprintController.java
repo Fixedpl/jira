@@ -30,19 +30,23 @@ public class SprintController {
     }
 
     @GetMapping("/{id}/start")
-    public void startSprint(@PathVariable("id") Integer id) {
+    public boolean startSprint(@PathVariable("id") Integer id) {
         SprintEntity sprintEntity = sprintRepository.findById(id).get();
         // TODO: Walidacja
         sprintEntity.setActualStartDate(LocalDateTime.now());
+        sprintEntity.setActive(true);
         sprintRepository.save(sprintEntity);
+        return true;
     }
 
     @GetMapping("/{id}/end")
-    public void endSprint(@PathVariable("id") Integer id) {
+    public boolean endSprint(@PathVariable("id") Integer id) {
         SprintEntity sprintEntity = sprintRepository.findById(id).get();
         // TODO: Walidacja
         sprintEntity.setActualEndDate(LocalDateTime.now());
+        sprintEntity.setActive(false);
         sprintRepository.save(sprintEntity);
+        return true;
     }
 
 }
