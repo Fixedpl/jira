@@ -41,12 +41,15 @@ public class InitialData {
 		ProjectEntity pacman = addProjectPacman();
 		addAdminToProjectPacman(admin, pacman);
 		addSprintsToPacman(pacman);
+		addPacmanTeam(pacman);
 	}
 
 	private UserEntity addAdmin() {
 		UserEntity userEntity = UserEntity.builder()
 				.email("admin")
 				.password(passwordEncoder.encode("admin"))
+				.firstName("Arnold")
+				.lastName("Admin")
 				.roleEnum(RoleEnum.ADMIN)
 				.build();
 		return userRepository.save(userEntity);
@@ -98,9 +101,117 @@ public class InitialData {
 		sprintEntity3.setActualStartDate(null);
 		sprintEntity3.setActualEndDate(null);
 
+		SprintEntity sprintEntity4 = new SprintEntity();
+		sprintEntity4.setProjectId(pacman.getId());
+		sprintEntity4.setTitle("Sprint 4 - Implementacja kontynuacja");
+		sprintEntity4.setActive(false);
+		sprintEntity4.setStartDate(currentDate.plusDays(8));
+		sprintEntity4.setEndDate(currentDate.plusDays(14));
+		sprintEntity4.setActualStartDate(null);
+		sprintEntity4.setActualEndDate(null);
+
+		SprintEntity sprintEntity5 = new SprintEntity();
+		sprintEntity5.setProjectId(pacman.getId());
+		sprintEntity5.setTitle("Sprint 5 - Testy");
+		sprintEntity5.setActive(false);
+		sprintEntity5.setStartDate(currentDate.plusDays(15));
+		sprintEntity5.setEndDate(currentDate.plusDays(21));
+		sprintEntity5.setActualStartDate(null);
+		sprintEntity5.setActualEndDate(null);
+
 		sprintRepository.save(sprintEntity1);
 		sprintRepository.save(sprintEntity2);
 		sprintRepository.save(sprintEntity3);
+		sprintRepository.save(sprintEntity4);
+		sprintRepository.save(sprintEntity5);
+	}
+
+	private void addPacmanTeam(ProjectEntity pacman) {
+		UserEntity teamLeader = UserEntity.builder()
+				.email("szef")
+				.password(passwordEncoder.encode("szef"))
+				.firstName("Rafał")
+				.lastName("Żurkowski")
+				.roleEnum(RoleEnum.USER)
+				.build();
+
+		UserEntity frontEndDeveloper = UserEntity.builder()
+				.email("frontend")
+				.password(passwordEncoder.encode("frontend"))
+				.firstName("Michał")
+				.lastName("Pavczenko")
+				.roleEnum(RoleEnum.USER)
+				.build();
+
+		UserEntity backEndDeveloper = UserEntity.builder()
+				.email("backend")
+				.password(passwordEncoder.encode("backend"))
+				.firstName("Bogdan")
+				.lastName("Jąder")
+				.roleEnum(RoleEnum.USER)
+				.build();
+
+		UserEntity analyst = UserEntity.builder()
+				.email("analyst")
+				.password(passwordEncoder.encode("analyst"))
+				.firstName("Przemysław")
+				.lastName("Pieczydupa")
+				.roleEnum(RoleEnum.USER)
+				.build();
+
+		UserEntity designer = UserEntity.builder()
+				.email("designer")
+				.password(passwordEncoder.encode("designer"))
+				.firstName("Gucio")
+				.lastName("Schneider")
+				.roleEnum(RoleEnum.USER)
+				.build();
+
+		UserEntity dodawany = UserEntity.builder()
+				.email("dodawany@gmail.com")
+				.password(passwordEncoder.encode("dodawany"))
+				.firstName("Żaneta")
+				.lastName("Schab")
+				.roleEnum(RoleEnum.USER)
+				.build();
+
+		userRepository.save(teamLeader);
+		userRepository.save(frontEndDeveloper);
+		userRepository.save(backEndDeveloper);
+		userRepository.save(analyst);
+		userRepository.save(designer);
+		userRepository.save(dodawany);
+
+		ProjectUserEntity teamLeaderLink = ProjectUserEntity.builder()
+				.projectId(pacman.getId())
+				.userId(teamLeader.getId())
+				.build();
+
+		ProjectUserEntity frontEndDeveloperLink = ProjectUserEntity.builder()
+				.projectId(pacman.getId())
+				.userId(frontEndDeveloper.getId())
+				.build();
+
+		ProjectUserEntity backEndDeveloperLink = ProjectUserEntity.builder()
+				.projectId(pacman.getId())
+				.userId(backEndDeveloper.getId())
+				.build();
+
+		ProjectUserEntity analystLink = ProjectUserEntity.builder()
+				.projectId(pacman.getId())
+				.userId(analyst.getId())
+				.build();
+
+		ProjectUserEntity designerLink = ProjectUserEntity.builder()
+				.projectId(pacman.getId())
+				.userId(designer.getId())
+				.build();
+
+		projectUserRepository.save(teamLeaderLink);
+		projectUserRepository.save(frontEndDeveloperLink);
+		projectUserRepository.save(backEndDeveloperLink);
+		projectUserRepository.save(analystLink);
+		projectUserRepository.save(designerLink);
 	}
 
 }
