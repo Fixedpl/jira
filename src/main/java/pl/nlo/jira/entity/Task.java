@@ -1,5 +1,6 @@
 package pl.nlo.jira.entity;
 
+import com.fasterxml.jackson.annotation.*;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,6 +14,8 @@ import pl.nlo.jira.entity.enums.State;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Builder
@@ -21,6 +24,7 @@ import java.time.LocalDateTime;
 @Entity
 @Audited
 @AuditOverride(forClass = Auditable.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Table(name = "tasks")
 public class Task extends Auditable {
     @Id
@@ -49,6 +53,11 @@ public class Task extends Auditable {
     @Enumerated(EnumType.STRING)
     private Priority priority;
 
-    //private Sprint sprint;
-
+    @ManyToMany
+    @JoinTable(
+            name = "sprint_task",
+            joinColumns = @JoinColumn(name = "task_id"),
+            inverseJoinColumns = @JoinColumn(name = "sprint_id")
+    )
+    private List<SprintEntity> sprints = new ArrayList<>();
 }

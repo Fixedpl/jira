@@ -1,8 +1,11 @@
 package pl.nlo.jira.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import pl.nlo.jira.entity.SprintEntity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 public class TaskDTO {
@@ -23,6 +26,7 @@ public class TaskDTO {
 
     private String priority;
 
-    //private Integer sprintId;
+    private Integer sprintId;
 
+    private List<SprintEntity> sprints;
 }

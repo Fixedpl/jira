@@ -1,13 +1,20 @@
 package pl.nlo.jira.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.envers.AuditOverride;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author marcin
@@ -18,8 +25,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "sprint")
+@Audited
+@AuditOverride(forClass = Auditable.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Table(name = "sprint")
-public class SprintEntity {
+public class SprintEntity extends Auditable {
 
 	@Id
 	@GeneratedValue
@@ -32,4 +42,6 @@ public class SprintEntity {
 	private LocalDateTime actualEndDate;
 	private boolean isActive;
 
+	@ManyToMany(mappedBy = "sprints")
+	private List<Task> tasks = new ArrayList<>();
 }
