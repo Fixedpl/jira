@@ -1,8 +1,16 @@
 package pl.nlo.jira.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import pl.nlo.jira.converters.UserConverter;
+import pl.nlo.jira.dto.UserDTO;
+import pl.nlo.jira.entity.ProjectUserEntity;
+import pl.nlo.jira.entity.UserEntity;
+import pl.nlo.jira.repository.ProjectUserRepository;
+import pl.nlo.jira.repository.UserRepository;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author marcin
@@ -13,6 +21,39 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class UserController {
 
+	private final UserRepository userRepository;
+	private final ProjectUserRepository projectUserRepository;
+	private final UserConverter userConverter;
 
+	@GetMapping("/{id}")
+	public UserDTO getUser(@PathVariable("id") Integer id) {
+		UserEntity userEntity = userRepository.findById(id)
+				.get();
+		return userConverter.convert(userEntity);
+	}
+
+	@PostMapping
+	public void editUser(@RequestBody UserEntity userEntity) {
+		// TODO
+	}
+
+	@GetMapping("/{projectId}/members")
+	public List<UserDTO> getProjectMembers(@PathVariable("projectId") Integer projectId) {
+		List<UserEntity> test = userRepository.getProjectMembers(projectId);
+		return test
+				.stream()
+				.map(userConverter::convert)
+				.collect(Collectors.toList());
+	}
+
+	@PostMapping("/{projectId}/members")
+	public void addMember(@PathVariable("projectId") Integer projectId, @RequestParam("email") String email) {
+		UserEntity userEntity = userRepository.findByEmail(email).get();
+
+		ProjectUserEntity projectUserEntity = new ProjectUserEntity();
+		projectUserEntity.setProjectId(projectId);
+		projectUserEntity.setUserId(userEntity.getId());
+		projectUserRepository.save(projectUserEntity);
+	}
 
 }

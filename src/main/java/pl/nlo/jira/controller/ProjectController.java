@@ -25,8 +25,6 @@ public class ProjectController {
 
 	private final ProjectRepository projectRepository;
 	private final AuthenticationService authenticationService;
-	private final UserRepository userRepository;
-	private final ProjectUserRepository projectUserRepository;
 
 	@GetMapping
 	public List<ProjectEntity> getProjects() {
@@ -37,19 +35,6 @@ public class ProjectController {
 	@GetMapping("/{id}")
 	public ProjectEntity findById(@PathVariable("id") Integer id) {
 		return projectRepository.findById(id).get();
-	}
-
-	@GetMapping("/{id}/members")
-	public List<UserEntity> getMembers(@PathVariable("id") Integer id) {
-		return userRepository.getProjectMembers(id);
-	}
-
-	@PostMapping("/{id}/members")
-	public void addMember(@PathVariable("id") Integer id, UserEntity userEntity) {
-		ProjectUserEntity projectUserEntity = new ProjectUserEntity();
-		projectUserEntity.setProjectId(id);
-		projectUserEntity.setUserId(userEntity.getId());
-		projectUserRepository.save(projectUserEntity);
 	}
 
 }

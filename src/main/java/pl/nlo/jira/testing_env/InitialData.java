@@ -48,6 +48,8 @@ public class InitialData {
 		UserEntity userEntity = UserEntity.builder()
 				.email("admin")
 				.password(passwordEncoder.encode("admin"))
+				.firstName("Arnold")
+				.lastName("Admin")
 				.roleEnum(RoleEnum.ADMIN)
 				.build();
 		return userRepository.save(userEntity);
@@ -128,30 +130,48 @@ public class InitialData {
 		UserEntity teamLeader = UserEntity.builder()
 				.email("szef")
 				.password(passwordEncoder.encode("szef"))
+				.firstName("Rafał")
+				.lastName("Żurkowski")
 				.roleEnum(RoleEnum.USER)
 				.build();
 
 		UserEntity frontEndDeveloper = UserEntity.builder()
 				.email("frontend")
 				.password(passwordEncoder.encode("frontend"))
+				.firstName("Michał")
+				.lastName("Pavczenko")
 				.roleEnum(RoleEnum.USER)
 				.build();
 
 		UserEntity backEndDeveloper = UserEntity.builder()
 				.email("backend")
 				.password(passwordEncoder.encode("backend"))
+				.firstName("Bogdan")
+				.lastName("Jąder")
 				.roleEnum(RoleEnum.USER)
 				.build();
 
 		UserEntity analyst = UserEntity.builder()
 				.email("analyst")
 				.password(passwordEncoder.encode("analyst"))
+				.firstName("Przemysław")
+				.lastName("Pieczydupa")
 				.roleEnum(RoleEnum.USER)
 				.build();
 
 		UserEntity designer = UserEntity.builder()
 				.email("designer")
 				.password(passwordEncoder.encode("designer"))
+				.firstName("Gucio")
+				.lastName("Schneider")
+				.roleEnum(RoleEnum.USER)
+				.build();
+
+		UserEntity dodawany = UserEntity.builder()
+				.email("dodawany@gmail.com")
+				.password(passwordEncoder.encode("dodawany"))
+				.firstName("Żaneta")
+				.lastName("Schab")
 				.roleEnum(RoleEnum.USER)
 				.build();
 
@@ -160,6 +180,7 @@ public class InitialData {
 		userRepository.save(backEndDeveloper);
 		userRepository.save(analyst);
 		userRepository.save(designer);
+		userRepository.save(dodawany);
 
 		ProjectUserEntity teamLeaderLink = ProjectUserEntity.builder()
 				.projectId(pacman.getId())
