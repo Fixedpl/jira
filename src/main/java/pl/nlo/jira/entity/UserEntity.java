@@ -21,13 +21,15 @@ import java.util.Collections;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Entity(name = "user_base")
 @Table(name = "user_base")
 public class UserEntity implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_STORE")
 	private Integer id;
 	private String email;
+	private String firstName;
+	private String lastName;
 	private String password;
 	private RoleEnum roleEnum;
 

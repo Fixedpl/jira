@@ -3,6 +3,7 @@ package pl.nlo.jira.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.nlo.jira.request.authentication.AuthenticationRequest;
@@ -54,6 +55,10 @@ public class AuthenticationService {
 		return AuthenticationResponse.builder()
 				.token(jwtToken)
 				.build();
+	}
+
+	public UserEntity getActiveUser() {
+		return (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	}
 
 }
