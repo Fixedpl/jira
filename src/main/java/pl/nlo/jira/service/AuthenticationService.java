@@ -6,6 +6,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.nlo.jira.dto.UserDTO;
+import pl.nlo.jira.mapper.UserMapper;
 import pl.nlo.jira.request.authentication.AuthenticationRequest;
 import pl.nlo.jira.response.authentication.AuthenticationResponse;
 import pl.nlo.jira.request.register.RegisterRequest;
@@ -27,6 +29,8 @@ public class AuthenticationService {
 	private final PasswordEncoder passwordEncoder;
 	private final JwtService jwtService;
 	private final AuthenticationManager authenticationManager;
+	private final UserMapper userMapper;
+
 
 	public AuthenticationResponse register(RegisterRequest request) {
 		UserEntity userEntity = UserEntity.builder()
@@ -60,5 +64,10 @@ public class AuthenticationService {
 	public UserEntity getActiveUser() {
 		return (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	}
+	public UserDTO getActiveUserDTO() {
+		return (UserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	}
+
+
 
 }
