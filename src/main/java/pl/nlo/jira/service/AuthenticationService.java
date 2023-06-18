@@ -29,7 +29,7 @@ public class AuthenticationService {
 	private final PasswordEncoder passwordEncoder;
 	private final JwtService jwtService;
 	private final AuthenticationManager authenticationManager;
-	private final UserMapper userMapper;
+
 
 
 	public AuthenticationResponse register(RegisterRequest request) {
@@ -64,9 +64,7 @@ public class AuthenticationService {
 	public UserEntity getActiveUser() {
 		return (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	}
-	public UserDTO getActiveUserDTO() {
-		return (UserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-	}
+
 
 
 

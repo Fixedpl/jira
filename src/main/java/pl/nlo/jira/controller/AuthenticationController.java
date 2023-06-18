@@ -34,9 +34,6 @@ public class AuthenticationController {
 	) {
 		return ResponseEntity.ok(authenticationService.authenticate(request));
 	}
-	@GetMapping("/user")
-	public UserDTO getUserInfo(){
-		return authenticationService.getActiveUserDTO();
-	}
+
 
 }
