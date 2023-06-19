@@ -1,17 +1,30 @@
 package pl.nlo.jira.dto;
 
-import lombok.Builder;
 import lombok.Data;
+import lombok.Builder;
 
-/**
- * @author marcin
- * @since 09.06.2023
- */
+import java.time.LocalDate;
+
 @Data
 @Builder
 public class UserDTO {
-	private Integer id;
-	private String email;
-	private String firstName;
-	private String lastName;
+    private Integer id;
+
+    private String username;
+
+    private String email;
+
+    private String firstName;
+
+    private String lastName;
+
+    private String location;
+
+    private String organizationName;
+
+    private Byte[] avatar;
+
+    private String phoneNumber;
+
+    private LocalDate birthday;
 }
