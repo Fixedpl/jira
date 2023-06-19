@@ -40,7 +40,6 @@ public class Task extends Auditable {
     @NotAudited
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @ManyToOne
-    @Column(updatable = false)
     private UserEntity reporter;
 
     @NotAudited
