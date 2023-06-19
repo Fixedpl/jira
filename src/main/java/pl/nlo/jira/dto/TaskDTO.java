@@ -1,12 +1,17 @@
 package pl.nlo.jira.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import pl.nlo.jira.entity.SprintEntity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 public class TaskDTO {
     private Long id;
+
+    private String title;
 
     private String description;
 
@@ -17,9 +22,11 @@ public class TaskDTO {
     private LocalDateTime estimatedTime;
 
     //TODO: Dorobic State, Sprint i Priority
-    //private State stateId;
+    private String state;
 
-    //private Integer sprintId;
+    private String priority;
 
-    //private Priority priorityId;
+    private Integer sprintId;
+
+    private List<SprintEntity> sprints;
 }

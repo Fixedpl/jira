@@ -10,8 +10,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import pl.nlo.jira.entity.enums.RoleEnum;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * @author marcin
@@ -25,13 +27,18 @@ import java.util.Collections;
 @Table(name = "user_base")
 public class UserEntity implements UserDetails {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_STORE")
 	private Integer id;
 	private String email;
 	private String firstName;
 	private String lastName;
 	private String password;
 	private RoleEnum roleEnum;
+
+	@OneToMany(mappedBy = "reporter", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Task> tasksReported = new ArrayList<>();
+	@OneToMany(mappedBy = "assigned", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Task> tasksAssigned = new ArrayList<>();
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
