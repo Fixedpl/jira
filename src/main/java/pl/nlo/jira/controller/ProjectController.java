@@ -5,10 +5,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.nlo.jira.dto.ProjectDTO;
 import pl.nlo.jira.entity.ProjectEntity;
+import pl.nlo.jira.entity.ProjectUserEntity;
 import pl.nlo.jira.entity.SprintEntity;
 import pl.nlo.jira.entity.UserEntity;
 import pl.nlo.jira.repository.ProjectRepository;
+import pl.nlo.jira.repository.ProjectUserRepository;
 import pl.nlo.jira.repository.SprintRepository;
+import pl.nlo.jira.repository.UserRepository;
 import pl.nlo.jira.service.AuthenticationService;
 import pl.nlo.jira.service.ProjectService;
 

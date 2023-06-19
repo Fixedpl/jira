@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.envers.AuditOverride;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
@@ -37,11 +38,14 @@ public class Task extends Auditable {
     private String description;
 
     @NotAudited
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @ManyToOne
+    @Column(updatable = false)
     private UserEntity reporter;
 
     @NotAudited
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @ManyToOne
     private UserEntity assigned;
 
     private LocalDateTime estimatedTime;
@@ -60,4 +64,7 @@ public class Task extends Auditable {
             inverseJoinColumns = @JoinColumn(name = "sprint_id")
     )
     private List<SprintEntity> sprints = new ArrayList<>();
+
+    @OneToMany(mappedBy = "task")
+    private List<Comment> comments = new ArrayList<>();
 }

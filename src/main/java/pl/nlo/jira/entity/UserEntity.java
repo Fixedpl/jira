@@ -10,9 +10,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import pl.nlo.jira.entity.enums.RoleEnum;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * @author marcin
@@ -41,6 +43,11 @@ public class UserEntity implements UserDetails {
 	private Byte[] avatar;
 	private String phoneNumber;
 	private LocalDate birthday;
+
+	@OneToMany(mappedBy = "reporter", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Task> tasksReported = new ArrayList<>();
+	@OneToMany(mappedBy = "assigned", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Task> tasksAssigned = new ArrayList<>();
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
