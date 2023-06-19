@@ -30,9 +30,7 @@ public class Comment extends Auditable {
     private Integer id;
 
     private String content;
-
-    private LocalDateTime date;
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="task_id", nullable=false)
     private Task task;
 }

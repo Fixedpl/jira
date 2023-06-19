@@ -10,8 +10,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import pl.nlo.jira.entity.enums.RoleEnum;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * @author marcin
@@ -32,6 +34,11 @@ public class UserEntity implements UserDetails {
 	private String lastName;
 	private String password;
 	private RoleEnum roleEnum;
+
+	@OneToMany(mappedBy = "reporter", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Task> tasksReported = new ArrayList<>();
+	@OneToMany(mappedBy = "assigned", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Task> tasksAssigned = new ArrayList<>();
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
