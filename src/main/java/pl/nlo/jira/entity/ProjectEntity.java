@@ -1,5 +1,6 @@
 package pl.nlo.jira.entity;
 
+import io.swagger.models.auth.In;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,4 +29,5 @@ public class ProjectEntity {
 	private String description;
 	private LocalDateTime startDate;
 	private LocalDateTime endDate;
+	//TODO dodac total tasks i id usera i pporawić wysyłanie informacji do bazy i odbieranie ich
 }

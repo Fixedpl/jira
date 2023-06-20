@@ -8,8 +8,10 @@ import pl.nlo.jira.entity.UserEntity;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
+
     UserEntity toEntity(UserDTO userDTO);
 
     UserDTO toDTO(UserEntity userEntity);
+
     void updateUserFromDto(UserDTO userDTO, @MappingTarget UserEntity userEntity);
 }
