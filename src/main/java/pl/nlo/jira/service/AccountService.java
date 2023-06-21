@@ -1,14 +1,17 @@
 package pl.nlo.jira.service;
 
 import lombok.RequiredArgsConstructor;
-import lombok.var;
-import org.apache.catalina.mapper.Mapper;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import pl.nlo.jira.converters.CustomMultiPartFile;
 import pl.nlo.jira.dto.UserDTO;
 import pl.nlo.jira.entity.UserEntity;
 import pl.nlo.jira.mapper.UserMapper;
 import pl.nlo.jira.repository.UserRepository;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 @Service
@@ -30,8 +33,28 @@ public class AccountService {
          userRepository.findById(userDTO.getId())
                 .map(e ->{
                     userMapper.updateUserFromDto(userDTO,e);
+
                  return userRepository.save(e);
                 }).orElseThrow(() -> new RuntimeException("ssss"));
 
+    }
+
+    public void updateActiveUserAvatar(MultipartFile file) throws Exception {
+
+        Optional<UserEntity> userEntity = userRepository.findById(getActiveUserDTO().getId());
+        if(!userEntity.isPresent()){
+            throw new Exception();
+        }
+        userEntity.get().setAvatar(file.getBytes());
+        userRepository.save(userEntity.get());
+
+    }
+
+    public byte[] getAvatar() {
+//        byte[] byteArray  = userRepository.findById(authenticationService.getActiveUser().getId()).get().getAvatar();
+//        CustomMultiPartFile customMultiPartFile = new CustomMultiPartFile(byteArray);
+//
+//        return customMultiPartFile;
+        return userRepository.findById(authenticationService.getActiveUser().getId()).get().getAvatar();
     }
 }

@@ -22,9 +22,8 @@ public class UserDTO {
 
     private String organizationName;
 
-    private Byte[] avatar;
-
     private String phoneNumber;
 
     private LocalDate birthday;
+
 }
