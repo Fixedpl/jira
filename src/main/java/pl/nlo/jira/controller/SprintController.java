@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import pl.nlo.jira.entity.SprintEntity;
 import pl.nlo.jira.repository.SprintRepository;
+import pl.nlo.jira.service.SprintService;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,12 +19,20 @@ import java.util.List;
 public class SprintController {
 
     private final SprintRepository sprintRepository;
+    private final SprintService sprintService;
 
     @GetMapping("/{projectId}")
     public List<SprintEntity> getSprints(@PathVariable("projectId") Integer projectId) {
         return sprintRepository.findByProjectId(projectId);
     }
-
+    @GetMapping("/{projectId}/completedTasks")
+    public Integer getCompletedTasks(@PathVariable("projectId") Integer projectId) {
+        return sprintService.getCompletedTasks(projectId);
+    }
+    @GetMapping("/{projectId}/totalTasks")
+    public Integer getTotalTasks(@PathVariable("projectId") Integer projectId) {
+        return sprintService.getTotalTasks(projectId);
+    }
     @PostMapping("/")
     public void addSprint(@RequestBody SprintEntity sprintEntity) {
         sprintRepository.save(sprintEntity);

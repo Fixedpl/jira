@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -39,8 +40,9 @@ public class UserEntity implements UserDetails {
 	private String password;
 	private RoleEnum roleEnum;
 	@Lob
+	@Type(type="org.hibernate.type.BinaryType")
 	@Basic(fetch = FetchType.LAZY)
-	private Byte[] avatar;
+	private byte[] avatar;
 	private String phoneNumber;
 	private LocalDate birthday;
 
