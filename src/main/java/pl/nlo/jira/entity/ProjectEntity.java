@@ -29,5 +29,5 @@ public class ProjectEntity {
 	private String description;
 	private LocalDateTime startDate;
 	private LocalDateTime endDate;
-	//TODO dodac total tasks i id usera i pporawić wysyłanie informacji do bazy i odbieranie ich
+
 }
