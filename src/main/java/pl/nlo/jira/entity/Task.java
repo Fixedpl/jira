@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.envers.AuditOverride;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
@@ -56,14 +58,18 @@ public class Task extends Auditable {
     @Enumerated(EnumType.STRING)
     private Priority priority;
 
-    @ManyToMany
-    @JoinTable(
-            name = "sprint_task",
-            joinColumns = @JoinColumn(name = "task_id"),
-            inverseJoinColumns = @JoinColumn(name = "sprint_id")
-    )
-    private List<SprintEntity> sprints = new ArrayList<>();
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(
+//            name = "sprint_task",
+//            joinColumns = @JoinColumn(name = "task_id"),
+//            inverseJoinColumns = @JoinColumn(name = "sprint_id")
+//    )
+//    private List<SprintEntity> sprints = new ArrayList<>();
+    @ManyToOne
+    @Fetch(FetchMode.JOIN)
+    @JoinColumn(name = "sprint_id")
+    private SprintEntity sprint;
 
-    @OneToMany(mappedBy = "task")
+    @OneToMany(mappedBy = "task", fetch = FetchType.EAGER)
     private List<Comment> comments = new ArrayList<>();
 }

@@ -46,5 +46,4 @@ public class SprintController {
         sprintEntity.setActive(false);
         sprintRepository.save(sprintEntity);
     }
-
 }

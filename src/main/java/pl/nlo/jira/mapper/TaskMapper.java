@@ -14,7 +14,8 @@ import java.util.List;
 public interface TaskMapper {
     @Mapping(target = "reporter.id", source = "reporterId")
     @Mapping(target = "assigned.id", source = "assignedId")
-    @Mapping(target = "sprints", source = "sprintId", qualifiedByName = "mapToSprintList")
+            @Mapping(target = "sprint.id", source = "sprintId")
+    //@Mapping(target = "sprints", source = "sprintId", qualifiedByName = "mapToSprintList")
     Task toEntity(TaskDTO taskDTO);
 
     @Mapping(target = "reporterId", source = "reporter.id")

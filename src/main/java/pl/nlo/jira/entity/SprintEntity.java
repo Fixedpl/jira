@@ -42,6 +42,8 @@ public class SprintEntity extends Auditable {
 	private LocalDateTime actualEndDate;
 	private boolean isActive;
 
-	@ManyToMany(mappedBy = "sprints")
-	private List<Task> tasks = new ArrayList<>();
+//	@ManyToMany(mappedBy = "sprints")
+//	private List<Task> tasks = new ArrayList<>();
+	@OneToMany(mappedBy = "sprint", fetch = FetchType.EAGER)
+	private List<Task> tasks;
 }
