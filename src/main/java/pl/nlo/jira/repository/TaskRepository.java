@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import pl.nlo.jira.entity.Task;
+import pl.nlo.jira.entity.enums.State;
 
 import java.util.List;
 
@@ -18,4 +19,7 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
     @Query("DELETE FROM Task t WHERE t.id = :id")
     void deleteById(@Param("id") Integer id);
 
+    @Modifying
+    @Query("UPDATE Task t SET t.state = :state WHERE t.id = :id")
+    void updateState(@Param("id") Integer id, @Param("state") State state);
 }

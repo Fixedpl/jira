@@ -7,6 +7,7 @@ import pl.nlo.jira.dto.TaskDTO;
 import pl.nlo.jira.entity.SprintEntity;
 import pl.nlo.jira.entity.Task;
 import pl.nlo.jira.entity.UserEntity;
+import pl.nlo.jira.entity.enums.State;
 import pl.nlo.jira.mapper.TaskMapper;
 import pl.nlo.jira.repository.SprintRepository;
 import pl.nlo.jira.repository.TaskRepository;
@@ -55,5 +56,10 @@ public class TaskService {
     @Transactional
     public void deleteTaskById(Integer id) {
         taskRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void updateState(Integer id, State state) {
+        taskRepository.updateState(id, state);
     }
 }

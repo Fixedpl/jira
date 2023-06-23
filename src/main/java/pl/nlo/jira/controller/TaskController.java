@@ -9,6 +9,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import pl.nlo.jira.controller.validator.TaskValidator;
 import pl.nlo.jira.dto.TaskDTO;
+import pl.nlo.jira.entity.enums.State;
 import pl.nlo.jira.repository.TaskRepository;
 import pl.nlo.jira.service.TaskService;
 
@@ -60,5 +61,10 @@ public class TaskController {
     @DeleteMapping("/delete/{id}")
     public void deleteTaskById(@PathVariable("id") Integer id) {
         taskService.deleteTaskById(id);
+    }
+
+    @PutMapping("/editState/{id}/{state}")
+    public void updateState(@PathVariable("id") Integer id, @PathVariable("state") State state) {
+        taskService.updateState(id, state);
     }
 }

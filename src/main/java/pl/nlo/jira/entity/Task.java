@@ -57,14 +57,6 @@ public class Task extends Auditable {
 
     @Enumerated(EnumType.STRING)
     private Priority priority;
-
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(
-//            name = "sprint_task",
-//            joinColumns = @JoinColumn(name = "task_id"),
-//            inverseJoinColumns = @JoinColumn(name = "sprint_id")
-//    )
-//    private List<SprintEntity> sprints = new ArrayList<>();
     @ManyToOne
     @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "sprint_id")
