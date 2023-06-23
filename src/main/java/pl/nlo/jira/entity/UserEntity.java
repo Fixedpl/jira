@@ -46,9 +46,9 @@ public class UserEntity implements UserDetails {
 	private String phoneNumber;
 	private LocalDate birthday;
 
-	@OneToMany(mappedBy = "reporter", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "reporter", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	private List<Task> tasksReported = new ArrayList<>();
-	@OneToMany(mappedBy = "assigned", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "assigned", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	private List<Task> tasksAssigned = new ArrayList<>();
 
 	@Override

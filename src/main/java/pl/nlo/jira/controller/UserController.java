@@ -1,6 +1,7 @@
 package pl.nlo.jira.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.nlo.jira.converters.UserConverter;
 import pl.nlo.jira.dto.UserDTO;
@@ -8,6 +9,7 @@ import pl.nlo.jira.entity.ProjectUserEntity;
 import pl.nlo.jira.entity.UserEntity;
 import pl.nlo.jira.repository.ProjectUserRepository;
 import pl.nlo.jira.repository.UserRepository;
+import pl.nlo.jira.service.AuthenticationService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +26,7 @@ public class UserController {
 	private final UserRepository userRepository;
 	private final ProjectUserRepository projectUserRepository;
 	private final UserConverter userConverter;
+	private final AuthenticationService authenticationService;
 
 	@GetMapping("/{id}")
 	public UserDTO getUser(@PathVariable("id") Integer id) {
@@ -46,6 +49,15 @@ public class UserController {
 				.collect(Collectors.toList());
 	}
 
+	@GetMapping("/{sprintId}/sprintMembers")
+	public List<UserDTO> getProjectMembersBySprintId(@PathVariable("sprintId") Integer sprintId) {
+		List<UserEntity> test = userRepository.getProjectMembersBySprintId(sprintId);
+		return test
+				.stream()
+				.map(userConverter::convert)
+				.collect(Collectors.toList());
+	}
+
 	@PostMapping("/{projectId}/members")
 	public void addMember(@PathVariable("projectId") Integer projectId, @RequestParam("email") String email) {
 		UserEntity userEntity = userRepository.findByEmail(email).get();
@@ -54,6 +66,11 @@ public class UserController {
 		projectUserEntity.setProjectId(projectId);
 		projectUserEntity.setUserId(userEntity.getId());
 		projectUserRepository.save(projectUserEntity);
+	}
+
+	@GetMapping("/getUser")
+	public ResponseEntity<UserEntity> getCurrentUser() {
+		return ResponseEntity.ok(authenticationService.getActiveUser());
 	}
 
 }

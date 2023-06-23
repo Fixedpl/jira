@@ -6,16 +6,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import pl.nlo.jira.dto.UserDTO;
-import pl.nlo.jira.mapper.UserMapper;
-import pl.nlo.jira.request.authentication.AuthenticationRequest;
-import pl.nlo.jira.response.authentication.AuthenticationResponse;
-import pl.nlo.jira.request.register.RegisterRequest;
 import pl.nlo.jira.entity.UserEntity;
 import pl.nlo.jira.entity.enums.RoleEnum;
+import pl.nlo.jira.repository.UserRepository;
+import pl.nlo.jira.request.authentication.AuthenticationRequest;
+import pl.nlo.jira.request.register.RegisterRequest;
+import pl.nlo.jira.response.authentication.AuthenticationResponse;
 import pl.nlo.jira.security.jwt.JwtService;
 import pl.nlo.jira.security.jwt.JwtToken;
-import pl.nlo.jira.repository.UserRepository;
 
 /**
  * @author marcin

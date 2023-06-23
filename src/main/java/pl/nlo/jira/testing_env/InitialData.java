@@ -19,10 +19,6 @@ import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-/**
- * @author marcin
- * @since 04.06.2023
- */
 @Component
 @Profile("test")
 @AllArgsConstructor
@@ -46,7 +42,7 @@ public class InitialData {
 
 	private UserEntity addAdmin() {
 		UserEntity userEntity = UserEntity.builder()
-				.email("admin")
+				.email("admin@gmail.com")
 				.password(passwordEncoder.encode("admin"))
 				.firstName("Arnold")
 				.lastName("Admin")
@@ -128,7 +124,7 @@ public class InitialData {
 
 	private void addPacmanTeam(ProjectEntity pacman) {
 		UserEntity teamLeader = UserEntity.builder()
-				.email("szef")
+				.email("szef@gmail.com")
 				.password(passwordEncoder.encode("szef"))
 				.firstName("Rafał")
 				.lastName("Żurkowski")
@@ -136,7 +132,7 @@ public class InitialData {
 				.build();
 
 		UserEntity frontEndDeveloper = UserEntity.builder()
-				.email("frontend")
+				.email("frontend@gmail.com")
 				.password(passwordEncoder.encode("frontend"))
 				.firstName("Michał")
 				.lastName("Pavczenko")
@@ -144,26 +140,26 @@ public class InitialData {
 				.build();
 
 		UserEntity backEndDeveloper = UserEntity.builder()
-				.email("backend")
+				.email("backend@gmail.com")
 				.password(passwordEncoder.encode("backend"))
 				.firstName("Bogdan")
-				.lastName("Jąder")
+				.lastName("Patheon")
 				.roleEnum(RoleEnum.USER)
 				.build();
 
 		UserEntity analyst = UserEntity.builder()
-				.email("analyst")
+				.email("analyst@gmail.com")
 				.password(passwordEncoder.encode("analyst"))
-				.firstName("Przemysław")
-				.lastName("Pieczydupa")
+				.firstName("Dora")
+				.lastName("JPEG")
 				.roleEnum(RoleEnum.USER)
 				.build();
 
 		UserEntity designer = UserEntity.builder()
-				.email("designer")
+				.email("designer@gmail.com")
 				.password(passwordEncoder.encode("designer"))
 				.firstName("Gucio")
-				.lastName("Schneider")
+				.lastName("Lolek")
 				.roleEnum(RoleEnum.USER)
 				.build();
 

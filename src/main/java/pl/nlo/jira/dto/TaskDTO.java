@@ -27,6 +27,4 @@ public class TaskDTO {
     private String priority;
 
     private Integer sprintId;
-
-    private List<SprintEntity> sprints;
 }

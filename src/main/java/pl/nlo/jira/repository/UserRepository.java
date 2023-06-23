@@ -21,4 +21,9 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 			"(SELECT pu.userId FROM project_user pu WHERE pu.projectId = :projectId)")
 	List<UserEntity> getProjectMembers(@Param("projectId") Integer projectId);
 
+//	@Query("SELECT u FROM UserEntity u JOIN ProjectUserEntity pu ON u.id = pu.userId " +
+//			"JOIN ProjectSprintEntity ps ON pu.projectId = ps.projectId WHERE ps.sprintId = :sprintId")
+	@Query("SELECT u FROM user_base u JOIN project_user pu ON u.id = pu.userId " +
+		"JOIN sprint s ON pu.projectId = s.projectId WHERE s.id = :sprintId")
+    List<UserEntity> getProjectMembersBySprintId(@Param("sprintId") Integer sprintId);
 }

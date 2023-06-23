@@ -4,12 +4,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.nlo.jira.dto.TaskDTO;
+import pl.nlo.jira.entity.SprintEntity;
 import pl.nlo.jira.entity.Task;
 import pl.nlo.jira.entity.UserEntity;
+import pl.nlo.jira.entity.enums.State;
 import pl.nlo.jira.mapper.TaskMapper;
+import pl.nlo.jira.repository.SprintRepository;
 import pl.nlo.jira.repository.TaskRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -20,9 +24,13 @@ public class TaskService {
 
     private final AuthenticationService authenticationService;
 
+    private final SprintRepository sprintRepository;
+
     @Transactional
     public void createTask(TaskDTO taskDTO) {
-        taskRepository.save(taskMapper.toEntity(taskDTO));
+        Task task = taskMapper.toEntity(taskDTO);
+        task.setReporter(authenticationService.getActiveUser());
+        taskRepository.save(task);
     }
 
     public void updateTask(TaskDTO taskDTO) {
@@ -39,5 +47,19 @@ public class TaskService {
         return taskRepository.findById(taskId)
                 .map(taskMapper::toDTO)
                 .orElseThrow(() -> new RuntimeException("Task not found"));
+    }
+
+    public List<TaskDTO> findAllBySprintId(Integer sprintId) {
+        return taskMapper.toDTOs(taskRepository.findAllBySprintId(sprintId));
+    }
+
+    @Transactional
+    public void deleteTaskById(Integer id) {
+        taskRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void updateState(Integer id, State state) {
+        taskRepository.updateState(id, state);
     }
 }

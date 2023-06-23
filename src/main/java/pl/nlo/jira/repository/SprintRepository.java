@@ -21,11 +21,9 @@ public interface SprintRepository extends JpaRepository<SprintEntity, Integer> {
 	List<SprintEntity> findByProjectId(@Param("projectId") Integer projectId);
 	@Query("SELECT s FROM sprint s WHERE s.projectId = :projectId AND s.isActive = true ")
 	Optional<SprintEntity> findByProjectIdAndSprintActive(Integer projectId);
-	@Query("SELECT t FROM Task t JOIN t.sprints s WHERE s.projectId = :projectId and s.isActive IS TRUE and t.state = 'DONE'")
+	@Query("SELECT t FROM Task t JOIN t.sprint s WHERE s.projectId = :projectId and s.isActive IS TRUE and t.state = 'DONE'")
 	List<Task> findCompletedTasks(@Param("projectId") Integer projectId);
 
-	@Query("SELECT t FROM Task t JOIN t.sprints s WHERE s.projectId = :projectId and s.isActive IS TRUE ")
+	@Query("SELECT t FROM Task t JOIN t.sprint s WHERE s.projectId = :projectId and s.isActive IS TRUE ")
 	List<Task> findTotalTasks(@Param("projectId") Integer projectId);
-
-	
 }
