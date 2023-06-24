@@ -63,7 +63,7 @@ public class TaskController {
         taskService.deleteTaskById(id);
     }
 
-    @PutMapping("/editState/{id}/{state}")
+    @GetMapping("/editState/{id}/{state}")
     public void updateState(@PathVariable("id") Integer id, @PathVariable("state") State state) {
         taskService.updateState(id, state);
     }
