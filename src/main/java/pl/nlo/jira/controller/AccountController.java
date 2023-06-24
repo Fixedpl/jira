@@ -20,7 +20,7 @@ public class AccountController {
 
     @GetMapping
     public ResponseEntity<UserEntity> getUserByEmail(@RequestBody AccountDTO accountDTO) {
-        return new ResponseEntity(accountService.getUserById(accountDTO.getEmail()), HttpStatus.OK);
+        return new ResponseEntity(accountService.getUserById(accountDTO.getEmail()), HttpStatus.MULTI_STATUS);
     }
     @GetMapping("/user")
     public UserDTO getUserInfo(){
